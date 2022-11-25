@@ -1,0 +1,284 @@
+% !Mode::"TeX:UTF-8"
+\documentclass[twocolumn,landscape,UTF8]{article}
+\usepackage{listings,lstautogobble}
+\usepackage{booktabs}
+\usepackage{verbatim}
+\usepackage{ctex}
+\usepackage{lastpage}
+%\usepackage{times} %use the Times New Roman fonts
+\usepackage{color}
+%\usepackage{placeins}
+%------------------------------------------------------------------------------
+\usepackage{lastpage}%获得总页数
+%------------------------------------------------------------------------------
+\usepackage{ulem}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{listings}
+\usepackage{makecell}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{setspace} % 行间距
+\usepackage{bm}%\boldsymbol 粗体
+% 数学
+\usepackage{amsmath,amsfonts,amsmath,amssymb,times}
+\usepackage{txfonts}
+\usepackage{enumerate}% 编号
+\usepackage{tikz,pgfplots} %绘图
+\usepackage{tkz-euclide,pgfplots}
+\usetikzlibrary{automata,positioning}
+%\usepackage[paperwidth=18.4cm,paperheight=26cm,top=1.5cm,bottom=2cm,right=2cm]{geometry} % 单页
+\usepackage[paperwidth=36.8cm,paperheight=26cm,top=1.5cm,bottom=2.0cm,right=1cm]{geometry}
+\lstset{language=C,keywordstyle=\color{red},showstringspaces=false,rulesepcolor=\color{green}}
+\oddsidemargin=0.1cm   %奇数页页边距
+\evensidemargin=0.1cm %偶数页页边距
+%\textwidth=14.5cm        %文本的宽度 单页
+\textwidth=34cm        %文本的宽度 单页
+%------------------------------------------------------------------------------------------------------------------------------
+\newsavebox{\zdx}%装订线
+\newcommand{\putzdx}{\marginpar{
+		\parbox{1cm}{\vspace{-2.5cm}         %%--调整装订线的上下高度
+			\rotatebox[origin=c]{90}{        %%--设置左侧装订线内内容在文章中的倾斜程度，“90”就是逆时针旋转90度
+				\usebox{\zdx}
+		}}
+}}
+\newcommand{\blank}{\uline{\textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}\ \textcolor{white}{a}}}
+\newcommand{\me}{\mathrm{e}}  %定义 对数常数e，虚数符号i,j以及微分算子d为直立体。
+\newcommand{\mi}{\mathrm{i}}
+\newcommand{\mj}{\mathrm{j}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\bs}{\boldsymbol}%数学黑体
+\newcommand{\ds}{\displaystyle}
+%通常我们使用的分数线是系统自己定义的分数线，即分数线的长度的预设值是分子或分母所占的最大宽度，如何让分数线的长度变长成，我们%可以在分子分母添加间隔来实现。如中文分式的命令可以定义为：
+%\newcommand{\chfrac[2]}{\cfrac{\;#1\;}{\;#2\;}}
+%\frac{1}{2} \qquad \chfrac{1}{2}
+%选择题
+\newcommand{\fourch}[4]{\\\begin{tabular}{*{4}{@{}p{3.5cm}}}(A)~#1 & (B)~#2 & (C)~#3 & (D)~#4\end{tabular}} % 四行
+\newcommand{\twoch}[4]{\\\begin{tabular}{*{2}{@{}p{7cm}}}(A)~#1 & (B)~#2\end{tabular}\\\begin{tabular}{*{2}{@{}p{7cm}}}(C)~#3 &
+		(D)~#4\end{tabular}}  %两行
+\newcommand{\onech}[4]{\\(A)~#1 \\ (B)~#2 \\ (C)~#3 \\ (D)~#4}  % 一行
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+%----------%%%---------%%%----------%%%---------%%%----------%%%-----------%%%-----------%%%---------
+%%---------%%%---------%%%----------%%%---------%%%----------%%%----------%%%-----------%%%----------
+\NewDocumentEnvironment{answer}{ +b }{
+	\ifanswer
+	{#1}
+	\else
+	\hphantom
+	{#1}
+	\fi
+}{}
+\newif\ifanswer
+
+% answertrue %% Set  answertrue to show the answer environmentanswerfalse %% Set  answerfalse to hide the answer environment
+\NewDocumentEnvironment{answerj}{ +b }{
+	\ifanswerj
+	{#1}
+	\else
+	\hphantom
+	{#1}
+	\vspace{2.5cm}
+	\fi
+}{}
+\newif\ifanswerj
+
+\NewDocumentEnvironment{answercalc}{ +b }{
+	\ifanswercalc
+	{#1}
+	\else
+	\hphantom
+	{#1}
+	\vspace{10cm}
+	\fi
+}{}
+\newif\ifanswercalc
+
+
+\answerfalse
+\answerjfalse
+\answercalcfalse
+\answertrue
+\answerjtrue
+\answercalctrue
+
+\lstset{
+autogobble=true
+}
+
+\begin{document}
+	\linewidth 14.5cm
+	
+	%---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	\fancyhf{}
+	\begin{comment}
+		\fancyfoot[CO,CE]{\vspace*{1mm}第\,\thepage\,页 , 共 ~\pageref{LastPage} 页}
+		\sbox{\zdx}
+		{\parbox{27cm}{
+				\centering \CJKfamily{song}姓~名\underline{\makebox[34mm][c]{}} \CJKfamily{song}学~号\underline{\makebox[34mm][c]{}}~班~级\underline{\makebox[34mm][c]{}}~ 座号~\underline{\makebox[34mm][c]{}}\\
+				\vspace{1.5mm}
+				请把答案写在答题卡上，并在试卷上填写姓名、学号、班级、座号\\
+				\vspace{0.5mm}
+				\dotfill{} 装\dotfill{}订\dotfill{}线\dotfill{} \\
+		}}
+		\reversemarginpar
+	\end{comment}
+	
+	\fancyfoot[CO,CE]{\vspace*{1mm}第\,\thepage\,页 , 共 ~\pageref{LastPage} 页}
+	\sbox{\zdx}
+	{\parbox{27cm}{ 
+			\dotfill{} 装\dotfill{}订\dotfill{}线\dotfill{} \\
+	}}
+	\reversemarginpar
+	%%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	\setlength{\marginparsep}{1.0cm}
+	\putzdx                            %%装订线--奇页数
+	%%-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	\begin{center}
+		\begin{LARGE}
+			湖州学院~\underline{~2022~-- 2023 }\,学年第\,\underline{~1~}\,学期\\ 
+			\vspace{2mm}{\bf 《XXXX》期末考试试卷}\\
+		\end{LARGE}
+		\vspace{2mm} *开卷考试，可带纸质资料，禁止使用\underline{计算器}以外的电子设备*\\
+		\vspace{2mm}适用班级 \underline{~12345678~}~~~~~~考试时间 \underline{~90~} 分钟 \\
+		\vspace{2mm}院（系） \underline{~~~~~~~~~~~~~~~~} ~~班级 \underline{~~~~~~~~~~~~~~~~} ~~学号 \underline{~~~~~~~~~~~~~~~~}~~姓名 \underline{~~~~~~~~~~~~}~~座位号 \underline{~~~~~~~~~~}
+		\par
+		\vspace{4mm}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			~题号~ & ~~一~~ & ~~二~~ & ~~三~~ & ~~四~~ & ~~五~~ & ~~六~ & ~~七~ & ~~八~ & ~~九~ & ~~十~ & ~总分~ \\
+			\hline
+			分数 &    &    &  & & & & & & & & \\
+			\hline
+		\end{tabular}
+		
+		%\vspace{0.5cm}
+	\end{center}
+	%\vspace{-0.5cm}
+	
+	%%-----------------%%%------------%%%--------------%%%-----------------%%%-------------%%%---------%%%---------%%%-----------分段：\par，或两个回车
+	%%%%%--------------%%%-------------%%%-------------%%%-----------------%%%-------------%%%--------%%%---------%%%------------导引线：\dotfill，\hrulefill
+	
+	\section*{\begin{tabular}{|c|}
+			\hline
+			\normalsize \normalfont 得分 \\
+			\hline
+			\\
+			\hline
+		\end{tabular} ~~一、选择题~(每小题~2 分，共~20 分) }					
+	
+	\begin{enumerate}\setcounter{enumi}{0}
+		%-----------------------------------------------------------------------------------
+		\item QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ ~(~~\begin{answer}D\end{answer}~~)
+		\onech{AAAAAAAAAAAAAAAAAAA}{BBBBBBBBBBBBBBBBBBBBBB}{CCCCCCCCCCCCCCCCCCCCCCC}{DDDDDDDDDDDDDDDDDDDDDD}
+		
+		\begin{comment}
+			\item 概念设计的规模应是 ~(~~\begin{answer}B\end{answer}~~)
+			\twoch{小试时的最佳规模}{工业化时的最佳规模}{中试时的最佳规模}{大型试验时的最佳规模}
+		\end{comment}
+		
+		\item QQQQQQQQQQQQQQQQQQQQQ ~(~~\begin{answer}A\end{answer}~~)
+		\twoch{AAAAAAAAAA}{BBBBBBBBBB}{CCCCCCCCCC}{DDDDDDDDDD}
+		QQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+		\item QQQQQQQQQQQQQQQQQQQQQQQQQQQQ ~(~~\begin{answer}B\end{answer}~~)
+		\fourch{AAAAA }{BBBBB}{CCCCC}{DDDDD}
+		
+		
+		
+		
+		
+		%----------------------------------------------------------------------------
+	\end{enumerate}
+	%%-----------%%%-------------%%%--------------%%%--------------%%%-------------%%%------------
+	%%-----------%%%-------------%%%--------------%%%--------------%%%-------------%%%------------
+	
+	\vspace{0.3cm}
+	\section*{\begin{tabular}{|c|}
+			\hline
+			\normalsize \normalfont 得分 \\
+			\hline
+			\\
+			\hline
+		\end{tabular} ~~二、填空题~(每小题~2 分, 共~ 20 分) }	
+	
+	
+	\begin{enumerate}\setcounter{enumi}{10}
+		%----------------------------------------------------------------------------------------------
+		
+		
+		\item XXXXXXXXXXXXXXXXXXX： ~\underline{~~\begin{answer}XX\end{answer}~~},~\underline{~~\begin{answer}XXXXXX\end{answer}~~}，~\underline{~~\begin{answer}XXXXXXXXXXX\end{answer}~~}，~\underline{~~\begin{answer}XXX\end{answer}~~}。
+		
+		%---------------------------------------------------------------
+	\end{enumerate}
+	\vspace{0.3cm}		
+	%%如果想另起一页，用“\newpage”
+	%%\putzdx %%装订线--奇页数
+	%%-------%%%------------%%%--------------%%%-------------%%%------------%%%-----------------%%%---------------------	
+	%%------%%%-------------%%%---------------%%%------------%%%------------%%%-----------------%%%---------------------
+	
+	\section*{\begin{tabular}{|c|}
+			\hline
+			\normalsize \normalfont 得分 \\
+			\hline
+			\\
+			\hline
+		\end{tabular} ~~三、简答题~( 共~20 分) 
+	}	
+	
+	\begin{enumerate}\setcounter{enumi}{20}
+		%----------------------------------------------------------------------
+		
+		\item ~(5分)XXXXXXXXXXXXXXXXXXXx。
+		
+		\begin{answerj}
+			（答案仅供参考，回答合理适当给分）\\
+			坚持需求导向、标准导向、特色导向，以社会需求为前提，以专业认证标准为参照，强化专业特色，持续提升专业内涵和建设水平。要以专业认证标准促进专业高质量发展，落实“学生中心、产出导向、持续改进”的理念，建强用好基层教学组织，形成以提高人才培养水平为核心的质量文化。
+			一流专业建设点要以新思想、新理念、新技术、新方法、新标准、新体系为引领，建设一批新工科、新医科、新文科示范性本科专业，建设一批适应创新型、复合型、应用型人才培养需要的一流本科课程，在专业改革创新、师资队伍、教学资源、质量保障体系等各方面发挥示范辐射作用。
+		\end{answerj}
+		
+		\item ~(5分)模板使用。
+		
+		\begin{lstlisting}
+			在代码第98行，
+			\answertrue
+			\answerjtrue
+			\answercalctrue
+			表示显示答案
+			
+			\answerfalse
+			\answerjfalse
+			\answercalcfalse
+			表示隐藏答案
+			
+			隐藏答案后留白的空间可用代码块控制，如：
+			\NewDocumentEnvironment{answercalc}{ +b }{
+				\ifanswercalc
+				{#1}
+				\else
+				\hphantom
+				{#1}
+				\vspace{10cm}
+				\fi
+			}{}
+			\newif\ifanswercalc
+			
+			改变\vspace{}中的数值，
+			即可改变以 answercalc 定义的答案的留白空间
+			
+			可自行定义\NewDocumentEnvironment灵活调整页面
+		\end{lstlisting}
+		
+
+		
+		
+		%------------------------------------------------------------
+	\end{enumerate}
+	
+	
+	%%------%%%%---------%%%%-------%%%-------------%%%----------%%%----------%%%%-------------%%%------------%%%%-----------%%%%-------------
+	%%-------%%%---------%%%---------%%%------------%%%-----------%%%----------%%%-------------%%%------------%%%-------------%%%-------------
+	\vspace{2cm}
+	\clearpage
+	
+\end{document}
